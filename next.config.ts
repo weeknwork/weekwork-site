@@ -11,9 +11,9 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         {
-          source: "/:path*",
+          source: "/:path((?!_next/|api/).*)",
           has: [{ type: "host", value: "admin.weekn.work" }],
-          destination: "/studio/:path*",
+          destination: "/studio/:path",
         },
       ],
     };
