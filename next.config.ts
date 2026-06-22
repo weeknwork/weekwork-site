@@ -7,8 +7,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "pub-d3948e3c6864410f867311bb74539f4d.r2.dev" },
     ],
   },
-};
-async rewrites() {
+  async rewrites() {
     return {
       beforeFiles: [
         {
