@@ -1,26 +1,210 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ============================================ */
+  /* COLOR TOKENS — change these to retheme       */
+  /* ============================================ */
+
+  /* Surfaces (section backgrounds) */
+  --color-canvas:        #FAFAF7;   /* default off-white */
+  --color-canvas-alt:    #F0EFEA;   /* alternating section bg */
+  --color-canvas-dark:   #0A0A0A;   /* inverse / dark section */
+  --color-hero:          #EF4444;   /* red-tinted bg */
+
+  /* Foreground (text) */
+  --color-ink:           #0A0A0A;   /* default text on light */
+  --color-ink-muted:     #6B6B66;   /* secondary / muted text */
+  --color-ink-light:     #FAFAF7;   /* text on dark section */
+
+  /* Lines / dividers */
+  --color-line:          #E5E4DF;
+  --color-line-dark:     #2A2A2A;
+
+  /* Accent (used sparingly) */
+  --color-accent:        #EF4444;
+  --color-accent-hover:  #DC2626;
+
+  /* Buttons (text-style by default, filled variant available) */
+  --color-button-text:        #0A0A0A;
+  --color-button-text-hover:  #FAFAF7;
+  --color-button-bg:          transparent;
+  --color-button-bg-hover:    #0A0A0A;
+
+  /* ============================================ */
+  /* TYPOGRAPHY SCALE                              */
+  /* (auto-generates text-* utilities)            */
+  /* ============================================ */
+
+  /* Parenthetical labels — uppercase tracked */
+  --text-label:                  0.8125rem;
+  --text-label--line-height:     1.2;
+  --text-label--letter-spacing:  0.05em;
+  --text-label--font-weight:     500;
+
+  /* Body */
+  --text-body-sm:                0.9375rem;
+  --text-body-sm--line-height:   1.5;
+
+  --text-body:                   1.0625rem;
+  --text-body--line-height:      1.6;
+
+  --text-body-lg:                1.25rem;
+  --text-body-lg--line-height:   1.5;
+
+  /* Display / headings */
+  --text-h3:                     1.75rem;
+  --text-h3--line-height:        1.2;
+  --text-h3--font-weight:        500;
+
+  --text-h2:                     clamp(2rem, 4vw, 3.25rem);
+  --text-h2--line-height:        1;
+  --text-h2--letter-spacing:     -0.02em;
+  --text-h2--font-weight:        500;
+
+  --text-h1:                     clamp(3rem, 6vw, 6rem);
+  --text-h1--line-height:        0.9;
+  --text-h1--letter-spacing:     -0.025em;
+  --text-h1--font-weight:        600;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================ */
+/* BASE STYLES                                   */
+/* ============================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ============================================ */
+/* FONT FAMILY UTILITIES                         */
+/* ============================================ */
+
+.font-sora {
+  font-family: var(--font-sora), system-ui, sans-serif;
+}
+
+.font-geist {
+  font-family: var(--font-geist), system-ui, sans-serif;
+}
+
+/* ============================================ */
+/* COMPOSED TYPOGRAPHY CLASSES                   */
+/* ============================================ */
+
+.label {
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.heading-hero {
+  font-family: var(--font-sora), system-ui, sans-serif;
+  font-size: clamp(5rem, 14vw, 15rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+.heading-section {
+  font-family: var(--font-sora), system-ui, sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.heading-h3 {
+  font-family: var(--font-sora), system-ui, sans-serif;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+/* ============================================ */
+/* SELECTION                                     */
+/* ============================================ */
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+/* ============================================ */
+/* ADAPTIVE NAV                                  */
+/* ============================================ */
+
+/* Hero — force no blend, plain white */
+.nav-hero,
+.nav-hero * {
+  mix-blend-mode: normal !important;
+}
+
+.nav-hero {
+  background: transparent;
+}
+
+.nav-hero .nav-wordmark,
+.nav-hero .nav-link {
+  color: var(--color-ink-light);
+  transition: color 300ms ease, opacity 300ms ease;
+}
+
+.nav-hero .nav-link:hover {
+  opacity: 0.7;
+}
+
+/* All other sections — mix-blend-difference */
+.nav-adaptive {
+  mix-blend-mode: difference;
+}
+
+.nav-adaptive .nav-wordmark,
+.nav-adaptive .nav-link {
+  color: #FFFFFF;
+  transition: color 300ms ease, opacity 300ms ease;
+}
+
+.nav-adaptive .nav-link:hover {
+  opacity: 0.6;
+}
+
+/* ============================================ */
+/* SECTION PADDING                               */
+/* ============================================ */
+
+.section {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
 }
