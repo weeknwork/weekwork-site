@@ -13,6 +13,8 @@ export const metadata = {
   title: "OUR WORKS | WEEK&WORK",
 };
 
+export const revalidate = 60;
+
 type ProjectSummary = {
   _id: string;
   title: string;

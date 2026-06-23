@@ -22,6 +22,8 @@ export async function generateStaticParams() {
   return slugs.map((s) => ({ slug: s.slug }));
 }
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {
