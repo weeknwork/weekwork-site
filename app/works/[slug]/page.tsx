@@ -189,7 +189,6 @@ export default async function WorkDetail({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 px-6 md:px-12 lg:px-24 pb-12 md:pb-16">
-            <p className="label text-ink-light opacity-70 mb-4">(PROJECT NAME)</p>
             <h1 className="heading-hero text-ink-light leading-none">{project.title}</h1>
           </div>
         </div>
